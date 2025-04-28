@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Belajar Rangkaian Campuran</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+    .title {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      padding-left: 20px;
+      font-size: 75px;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+      z-index: 10;
+    }
+    .circuit-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-image: url('campuran.png'); /* opsional: gambar latar */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .wire {
+      position: absolute;
+      background: green;
+      height: 9px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .wire.off {
+      background: red;
+    }
+    .lamp {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background: yellow;
+      border-radius: 50%;
+      box-shadow: 0 0 20px yellow;
+      transition: 0.3s;
+    }
+    .lamp.off {
+      background: gray;
+      box-shadow: none;
+    }
+
+    /* Posisi lampu dan kabel */
+    #lamp1 { top: 103px; right: 841px; }
+    #lamp2 { top: 103px; right: 495px; }
+    #lamp3 { top: 309px; right: 647px; }
+    #lamp4 { bottom: 250px; right: 647px; }
+
+    #wire1 { top: 271px; left: 433px; width: 9px; height: 172px; }
+    #wire2 { top: 465px; left: 470px; width: 200px; }
+    #wire3 { bottom: 168px; left: 470px; width: 200px; }
+  </style>
+</head>
+<body>
+
+  <div class="title">Belajar Rangkaian Campuran</div>
+  
+  <div class="circuit-container">
+    <div class="wire" id="wire1" onclick="toggleWire('wire1')"></div>
+    <div class="wire" id="wire2" onclick="toggleWire('wire2')"></div>
+    <div class="wire" id="wire3" onclick="toggleWire('wire3')"></div>
+
+    <div class="lamp" id="lamp1"></div>
+    <div class="lamp" id="lamp2"></div>
+    <div class="lamp" id="lamp3"></div>
+    <div class="lamp" id="lamp4"></div>
+  </div>
+
+  <script>
+    function toggleWire(wireId) {
+      const wire = document.getElementById(wireId);
+      wire.classList.toggle('off');
+      updateCircuit();
+    }
+
+    function updateCircuit() {
+      const wire1 = document.getElementById('wire1');
+      const wire2 = document.getElementById('wire2');
+      const wire3 = document.getElementById('wire3');
+      
+      const lamp1 = document.getElementById('lamp1');
+      const lamp2 = document.getElementById('lamp2');
+      const lamp3 = document.getElementById('lamp3');
+      const lamp4 = document.getElementById('lamp4');
+
+      // Lampu 1 dan 2 mati kalau wire1 putus
+      if (wire1.classList.contains('off')) {
+        lamp1.classList.add('off');
+        lamp2.classList.add('off');
+      } else {
+        lamp1.classList.remove('off');
+        lamp2.classList.remove('off');
+      }
+
+      // Lampu 3 mati kalau wire2 putus
+      if (wire2.classList.contains('off')) {
+        lamp3.classList.add('off');
+      } else {
+        lamp3.classList.remove('off');
+      }
+
+      // Lampu 4 mati kalau wire3 putus
+      if (wire3.classList.contains('off')) {
+        lamp4.classList.add('off');
+      } else {
+        lamp4.classList.remove('off');
+      }
+    }
+  </script>
+<button onclick="location.href='index.html'" style="
+position: fixed;
+bottom: 20px;
+left: 20px;
+padding: 8px 16px;
+font-size: 14px;
+background-color: #f44336;
+color: white;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+transition: background 0.3s;
+">
+Kembali
+</button>
+
+</body>
+</html>
